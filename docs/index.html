@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post 3: Certificación EMV L3 y Motores Bitmask | Alejandro Barragán Jasso</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-black">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <a href="https://github.com/Alejano/emv-l3-bitmask-rule-engine" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+          <i data-lucide="arrow-left" class="w-5 h-5"></i>
+          <span class="text-sm font-semibold">Volver al Hub</span>
+        </a>
+      </div>
+      <div class="flex items-center space-x-2 text-xs font-mono">
+        <span class="px-2.5 py-1 rounded-full bg-emerald-950 border border-emerald-800 text-emerald-400">TEMA 03 / 05</span>
+        <span class="text-slate-500 hidden sm:inline">Semana 2 · Martes</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Title Section -->
+  <main class="max-w-5xl mx-auto px-4 py-12 flex-1 w-full">
+    <div class="mb-10 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-800/50 text-emerald-400 text-xs font-semibold mb-4">
+        <i data-lucide="binary" class="w-3.5 h-3.5"></i>
+        EMV L3 Certification & Reverse Engineering
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+        Certificación EMV L3: Motores de Reglas Bitmask
+      </h1>
+      <p class="text-slate-400 text-lg max-w-3xl mx-auto">
+        Descifrando la lógica de evaluación en paquetes L3tse, fórmulas matemáticas de 72 bits y recálculo de integridad SHA-1/SHA-256.
+      </p>
+    </div>
+
+    <!-- LinkedIn Copy Box -->
+    <div class="glass-panel rounded-2xl p-6 border-emerald-500/30 mb-12 shadow-xl shadow-emerald-950/20">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <i data-lucide="linkedin" class="w-5 h-5 text-emerald-400"></i>
+          <h2 class="text-base font-bold text-white">Texto Listo para Publicar en LinkedIn</h2>
+        </div>
+        <button onclick="copyToClipboard('post-copy-text', '¡Texto copiado!')" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-md">
+          <i data-lucide="copy" class="w-4 h-4"></i>
+          <span>Copiar Post para LinkedIn</span>
+        </button>
+      </div>
+      <pre id="post-copy-text" class="text-xs sm:text-sm text-slate-200 whitespace-pre-wrap font-sans bg-slate-900/90 p-4 rounded-xl border border-slate-800 leading-relaxed">💳 Descifrando la "caja negra": Ingeniería inversa en herramientas oficiales de certificación EMV L3
+
+Durante un proceso de certificación de pagos frente a marcas de tarjetas internacionales, nos encontramos con una limitación crítica: la suite oficial de pruebas no permitía configurar escenarios combinados (multi-CVM) desde su interfaz gráfica.
+
+En lugar de quedarnos bloqueados, analizamos la estructura interna de los archivos de intercambio EMVCo L3tse (paquetes comprimidos con XMLs y firmas de integridad).
+
+Descubrimos que la aplicabilidad de los casos no dependía del nombre de la tarjeta, sino de un motor matemático de bitmasks de 72 bits.
+
+En este carrusel te muestro cómo funciona la fórmula y cómo logramos inyectar casos de prueba personalizados sin corromper el validador oficial. 👇
+
+#EMV #Fintech #ReverseEngineering #PaymentSystems #Testing #Cybersecurity #SoftwareEngineering</pre>
+
+      <div class="mt-4 pt-4 border-t border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div class="text-slate-400">
+          <span class="font-semibold text-slate-300">Pregunta de Debate:</span> "¿Alguna vez tuviste que desarmar una herramienta de certificación o software de terceros para entender por qué rechazaba tus pruebas?"
+        </div>
+        <button onclick="copyToClipboard('debate-comment-text', '¡Pregunta copiada!')" class="text-emerald-400 hover:text-emerald-300 font-semibold inline-flex items-center gap-1.5 self-start sm:self-auto">
+          <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+          <span>Copiar Debate</span>
+        </button>
+      </div>
+      <p id="debate-comment-text" class="hidden">¿Alguna vez tuviste que desarmar una herramienta de certificación o software de terceros para entender por qué rechazaba tus pruebas? Cuéntame tu anécdota en los comentarios.</p>
+    </div>
+
+    <!-- Slides Viewer -->
+    <div class="mb-14">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2">
+          <i data-lucide="presentation" class="w-5 h-5 text-emerald-400"></i>
+          <h2 class="text-xl font-bold text-white">Carrusel Técnico Interactivo (7 Slides)</h2>
+        </div>
+        <div class="text-xs font-mono text-slate-400" id="slide-indicator">Slide 1 de 7</div>
+      </div>
+
+      <div class="relative bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden min-h-[420px] flex items-center justify-center p-6 sm:p-10 shadow-2xl">
+        <!-- Slide 1 -->
+        <div class="slide-item active flex-col items-center text-center max-w-2xl" data-slide="1">
+          <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mb-6">
+            <i data-lucide="credit-card" class="w-8 h-8"></i>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 text-xs font-semibold mb-4 border border-emerald-800">Slide 1 · Portada</span>
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">Ingeniería Inversa en Pruebas EMV L3</h3>
+          <p class="text-slate-300 text-base leading-relaxed">
+            Cómo desciframos un motor de reglas bitmask de 72 bits para inyectar casos de prueba personalizados sin corromper la suite oficial.
+          </p>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide-item flex-col items-center text-left max-w-2xl" data-slide="2">
+          <span class="px-3 py-1 rounded-full bg-red-950 text-red-400 text-xs font-semibold mb-4 border border-red-800 self-center">Slide 2 · El Problema</span>
+          <h3 class="text-2xl font-bold text-white mb-4 text-center">La Limitación de la GUI Oficial</h3>
+          <ul class="space-y-3 text-slate-300 text-sm">
+            <li class="flex items-start gap-2.5">
+              <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-400 shrink-0 mt-0.5"></i>
+              <span>Requeríamos simular una tarjeta contactless con soporte simultáneo de Online PIN + Firma + Sin CVM.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i data-lucide="x-circle" class="w-5 h-5 text-red-400 shrink-0 mt-0.5"></i>
+              <span>La herramienta de laboratorio ignoraba los casos agregados manualmente sin mostrar ningún error descriptivo.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i data-lucide="file-question" class="w-5 h-5 text-slate-400 shrink-0 mt-0.5"></i>
+              <span>Existía un validador interno que comprobaba hashes y reglas binarias invisibles en la interfaz de usuario.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide-item flex-col items-center text-left max-w-2xl w-full" data-slide="3">
+          <span class="px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 text-xs font-semibold mb-4 border border-emerald-800 self-center">Slide 3 · Anatomía del Paquete</span>
+          <h3 class="text-xl font-bold text-white mb-4 text-center">Estructura del Contenedor .tpp</h3>
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs font-mono text-slate-300 space-y-1.5 w-full">
+            <p class="text-emerald-400">📦 paquete.tpp (ZIP)</p>
+            <p>├── ProjectInfo.json (Sumas SHA-256)</p>
+            <p>├── Manifest.json</p>
+            <p>└── Módulos .tsez</p>
+            <p class="pl-4">└── RuleSet.xml (Reglas firmadas con <span class="text-cyan-300">&lt;!--BASE64(SHA1(body))--&gt;</span>)</p>
+          </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide-item flex-col items-center text-left max-w-2xl" data-slide="4">
+          <span class="px-3 py-1 rounded-full bg-cyan-950 text-cyan-400 text-xs font-semibold mb-4 border border-cyan-800 self-center">Slide 4 · La Fórmula Bitmask</span>
+          <h3 class="text-2xl font-bold text-white mb-4 text-center">Fórmula Matemática Oficial</h3>
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 text-center w-full mb-4">
+            <code class="text-base font-bold text-emerald-400">(ConfigTerminal & Mask2) == (Mask1 & Mask2)</code>
+          </div>
+          <ul class="text-xs text-slate-300 space-y-2">
+            <li><strong class="text-cyan-400">Mask2 ('Care Mask'):</strong> Determina qué capacidades exactas de la terminal son evaluadas.</li>
+            <li><strong class="text-cyan-400">Mask1 ('Expected Value'):</strong> El valor exacto requerido para esos bits específicos.</li>
+          </ul>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide-item flex-col items-center text-left max-w-2xl" data-slide="5">
+          <span class="px-3 py-1 rounded-full bg-violet-950 text-violet-400 text-xs font-semibold mb-4 border border-violet-800 self-center">Slide 5 · El Hallazgo de CVM</span>
+          <h3 class="text-2xl font-bold text-white mb-4 text-center">El Detalle Oculto</h3>
+          <p class="text-sm text-slate-300 leading-relaxed mb-3">
+            Descubrimos que el motor oficial <strong>NUNCA</strong> evaluaba los bits de Firma Contactless ni CDCVM en la máscara:
+          </p>
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 text-xs text-emerald-300 font-mono">
+            ✔ Solo evaluaba el bit de Online PIN Contactless y el alcance general.<br>
+            ✔ Un caso multi-CVM requería la misma máscara de su caso base, pero alterando los tags TLV en la definición de la tarjeta (Tag 8E).
+          </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide-item flex-col items-center text-left max-w-2xl" data-slide="6">
+          <span class="px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 text-xs font-semibold mb-4 border border-emerald-800 self-center">Slide 6 · Checklist de Inyección</span>
+          <h3 class="text-2xl font-bold text-white mb-4 text-center">Inyección sin Corromper el Validador</h3>
+          <ol class="space-y-2 text-xs text-slate-300 list-decimal pl-4">
+            <li>Insertar definición <code class="text-emerald-300">&lt;Test&gt;</code> en <code class="text-slate-400">RuleSet.xml</code>.</li>
+            <li>Registrar la regla en <code class="text-slate-400">&lt;Selection&gt;</code> y <code class="text-slate-400">Selected.xml</code>.</li>
+            <li>Recalcular firma SHA-1 en el comentario final del XML.</li>
+            <li>Recalcular sumas SHA-256 en <code class="text-slate-400">Manifest.json</code> y reempaquetar el ZIP.</li>
+          </ol>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide-item flex-col items-center text-center max-w-2xl" data-slide="7">
+          <span class="px-3 py-1 rounded-full bg-indigo-950 text-indigo-400 text-xs font-semibold mb-4 border border-indigo-800">Slide 7 · Cierre & Debate</span>
+          <h3 class="text-2xl font-bold text-white mb-3">¿Has tenido que desarmar una herramienta oficial?</h3>
+          <p class="text-slate-300 text-sm leading-relaxed mb-6">
+            ¿Alguna vez realizaste ingeniería inversa en una suite de certificación o software de terceros para entender sus rechazos silenciosos?
+          </p>
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 text-xs text-emerald-400 font-semibold">
+            💬 Déjame tu experiencia en los comentarios y guarda este carrusel.
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center justify-between mt-4">
+        <button onclick="prevSlide()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold transition-all flex items-center gap-1.5 border border-slate-700">
+          <i data-lucide="chevron-left" class="w-4 h-4"></i>
+          <span>Anterior</span>
+        </button>
+        <div class="flex gap-1.5" id="dots-container"></div>
+        <button onclick="nextSlide()" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold transition-all flex items-center gap-1.5">
+          <span>Siguiente</span>
+          <i data-lucide="chevron-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Interactive Simulator: 72-Bit Bitmask Calculator -->
+    <div class="glass-panel rounded-2xl p-6 sm:p-8 border border-slate-800 mb-14">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center">
+          <i data-lucide="calculator" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-white">Calculadora en Vivo del Motor Bitmask (72 Bits)</h2>
+          <p class="text-xs text-slate-400">Evalúa la fórmula oficial: (Terminal & Mask2) == (Mask1 & Mask2)</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-3">
+          <div class="flex gap-2 mb-2">
+            <button onclick="setVectorPreset('visa')" class="text-xs px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-slate-700">
+              Preset: Visa Contactless
+            </button>
+            <button onclick="setVectorPreset('kiosk')" class="text-xs px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700">
+              Preset: Kiosko Incompatible
+            </button>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Configuración Terminal (Hex 72-bit):</label>
+            <input type="text" id="bm-term" value="000000000000000302" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-emerald-400 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Mask1 - Expected Value (Hex):</label>
+            <input type="text" id="bm-m1" value="000000000000000102" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Mask2 - Care Mask (Hex):</label>
+            <input type="text" id="bm-m2" value="000000000000000102" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none">
+          </div>
+          <button onclick="calcBitmask()" class="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-all flex items-center justify-center gap-2">
+            <i data-lucide="play" class="w-4 h-4"></i>
+            <span>Evaluar Aplicabilidad</span>
+          </button>
+        </div>
+
+        <div class="bg-slate-900/90 rounded-xl p-4 border border-slate-800 font-mono text-xs flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="text-slate-400 flex justify-between items-center pb-2 border-b border-slate-800">
+              <span>RESULTADO DEL MOTOR</span>
+              <span id="bm-result-badge" class="text-emerald-400 font-bold">APLICABLE</span>
+            </div>
+            <div id="bm-debug-log" class="text-slate-300 space-y-1 text-xs">
+              Presiona 'Evaluar' para computar las operaciones binarias.
+            </div>
+            <div class="pt-3 border-t border-slate-800">
+              <span class="text-slate-500 block mb-1">Firma SHA-1 Calculada para RuleSet.xml:</span>
+              <code id="bm-sha1-sig" class="text-cyan-400 break-all">&lt;!--Zm4mIxR8QzfB1igyMAZdcAx45c4=--&gt;</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Source Code Reference -->
+    <div class="glass-panel rounded-2xl p-6 sm:p-8 border border-slate-800 mb-14">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h2 class="text-xl font-bold text-white">Código de Referencia</h2>
+          <p class="text-xs text-slate-400 font-mono">examples/03_emv_l3_bitmasks/bitmask_rule_engine.py</p>
+        </div>
+        <a href="https://github.com/alejano" target="_blank" class="text-xs text-emerald-400 hover:underline flex items-center gap-1 font-semibold">
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          Ver en GitHub
+        </a>
+      </div>
+      <div class="p-4 bg-slate-900 rounded-xl border border-slate-800 text-xs font-mono text-slate-300">
+        <p class="text-slate-500 mb-2"># Ejecuta el motor bitmask completo en consola:</p>
+        <code class="text-emerald-400">python examples/03_emv_l3_bitmasks/bitmask_rule_engine.py</code>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast" class="bg-emerald-500 text-slate-950 font-bold px-4 py-2.5 rounded-xl shadow-xl flex items-center gap-2 text-sm">
+    <i data-lucide="check" class="w-4 h-4"></i>
+    <span id="toast-text">Acción exitosa</span>
+  </div>
+
+  <footer class="border-t border-slate-800 py-8 text-center text-xs text-slate-500">
+    <p>© 2026 Alejandro Barragán Jasso · EMVCo L3 Certification Engineering</p>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    let currentSlide = 1;
+    const totalSlides = 7;
+
+    function renderDots() {
+      const dotsContainer = document.getElementById('dots-container');
+      dotsContainer.innerHTML = '';
+      for (let i = 1; i <= totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = `w-2.5 h-2.5 rounded-full transition-all ${i === currentSlide ? 'bg-emerald-400 w-6' : 'bg-slate-700'}`;
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function updateSlide() {
+      document.querySelectorAll('.slide-item').forEach(el => {
+        el.classList.remove('active');
+        if (parseInt(el.getAttribute('data-slide')) === currentSlide) {
+          el.classList.add('active');
+        }
+      });
+      document.getElementById('slide-indicator').innerText = `Slide ${currentSlide} de ${totalSlides}`;
+      renderDots();
+    }
+
+    function nextSlide() { currentSlide = currentSlide < totalSlides ? currentSlide + 1 : 1; updateSlide(); }
+    function prevSlide() { currentSlide = currentSlide > 1 ? currentSlide - 1 : totalSlides; updateSlide(); }
+    function goToSlide(n) { currentSlide = n; updateSlide(); }
+    renderDots();
+
+    function copyToClipboard(elementId, toastMessage) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('toast');
+        document.getElementById('toast-text').innerText = toastMessage;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+      });
+    }
+
+    function setVectorPreset(type) {
+      if (type === 'visa') {
+        document.getElementById('bm-term').value = "000000000000000302";
+        document.getElementById('bm-m1').value = "000000000000000102";
+        document.getElementById('bm-m2').value = "000000000000000102";
+      } else {
+        document.getElementById('bm-term').value = "000000000000000302";
+        document.getElementById('bm-m1').value = "000000010000000000"; // Kiosk Bit 32
+        document.getElementById('bm-m2').value = "000000010000000000";
+      }
+      calcBitmask();
+    }
+
+    function calcBitmask() {
+      const parseBigHex = (hex) => BigInt("0x" + hex.replace("0x", ""));
+      try {
+        const term = parseBigHex(document.getElementById('bm-term').value);
+        const m1 = parseBigHex(document.getElementById('bm-m1').value);
+        const m2 = parseBigHex(document.getElementById('bm-m2').value);
+
+        const actual = term & m2;
+        const expected = m1 & m2;
+        const isApplicable = (actual === expected);
+
+        const badge = document.getElementById('bm-result-badge');
+        badge.innerText = isApplicable ? "APLICABLE (PASÓ)" : "NO APLICABLE (DESCARTADO)";
+        badge.className = isApplicable ? "text-emerald-400 font-bold" : "text-red-400 font-bold";
+
+        document.getElementById('bm-debug-log').innerHTML = `
+          Terminal & Mask2 = 0x${actual.toString(16).toUpperCase()}<br>
+          Mask1 & Mask2    = 0x${expected.toString(16).toUpperCase()}<br>
+          ${isApplicable ? "✔ La terminal cumple con las capacidades auditadas por la regla." : "❌ Faltan bits de hardware requeridos por la máscara de prueba."}
+        `;
+      } catch (e) {
+        alert("Hexadecimal inválido: " + e.message);
+      }
+    }
+
+    // Run once on load
+    calcBitmask();
+  </script>
+</body>
+</html>
